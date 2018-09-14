@@ -1,11 +1,10 @@
 const router = require("express").Router();
-const UserController = require("../controllers/userControllers");
+const movieRoute = require("./movies");
+
+router.use("/movies", movieRoute);
 
 router.get("/", function(req, res) {
 	res.send("Well This works");
 });
-
-router.post("/register", UserController.signup);
-router.post("/login", UserController.login);
 
 module.exports = router;

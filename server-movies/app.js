@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-	console.log(err);
+	console.log(err)
 	res.status(err.status || 500).json({
 		message: err.message,
 		error: {}
@@ -49,7 +49,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(process.env.PORT || 3001, () => {
-	console.log("Movie connected!");
+	console.log("movies connected!");
 });
 
 module.exports = app;
