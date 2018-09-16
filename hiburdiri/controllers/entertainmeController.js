@@ -68,20 +68,20 @@ module.exports = {
 				{ json: true }
 			);
 
-			let response = await request.get(
+			let allresponse = await request.get(
 				serverUrlHelper.getUrlBySection(req.params.sectionId),
 				{ json: true }
 			);
 			let value = await setValue(
 				`${req.params.sectionId}`,
-				JSON.stringify(response)
+				JSON.stringify(allresponse)
 			);
 
 			let movies = await request.get(process.env.BASE_URL_MOVIE, {
 				json: true
 			});
 			let tvs = await request.get(process.env.BASE_URL_TV, { json: true });
-			let value = await setValue("all", { movies: movies, series: tvs });
+			let morevalue = await setValue("all", { movies: movies, series: tvs });
 
 			res.status(200).json(response);
 		} catch (err) {
