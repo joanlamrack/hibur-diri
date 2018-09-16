@@ -22,8 +22,8 @@
     "mocha": "^5.2.0"
   },
   "scripts": {
-	"test": "NODE_ENV=test mocha",
-	"start": "NODE_ENV=production node app.js"
+    "test": "NODE_ENV=test mocha",
+    "start": "NODE_ENV=production node app.js"
   },
   "repository": {
     "type": "git",
