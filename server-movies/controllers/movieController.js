@@ -11,8 +11,10 @@ class MovieController {
 			poster_path: req.body.poster_path,
 			popularity: req.body.popularity
 		})
-			.then(response => {
-				res.status(201).json(response);
+			.then(data => {
+				res
+					.status(201)
+					.json({ info: "movie created successfully", data: data });
 			})
 			.catch(err => {
 				res.status(400).json({
@@ -25,7 +27,7 @@ class MovieController {
 		Tv.find({})
 			.populate("tag")
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "movies found successfully", data: data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -35,7 +37,7 @@ class MovieController {
 	static getById(req, res) {
 		Tv.findById(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "movie found successfully", data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -50,10 +52,13 @@ class MovieController {
 				overview: req.body.overview,
 				poster_path: req.body.poster_path,
 				popularity: req.body.popularity
+			},
+			{
+				new:true
 			}
 		)
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "movie updated successfully", data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -63,7 +68,7 @@ class MovieController {
 	static delete(req, res) {
 		Tv.findByIdAndRemove(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "movie delete successfully", data });
 			})
 			.catch(err => {
 				res.status(500).json(err);

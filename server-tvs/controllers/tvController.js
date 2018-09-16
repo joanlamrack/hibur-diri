@@ -11,8 +11,8 @@ class TvController {
 			poster_path: req.body.poster_path,
 			popularity: req.body.popularity
 		})
-			.then(response => {
-				res.status(201).json(response);
+			.then(data => {
+				res.status(201).json({ info: "Tv created successfully", data: data });
 			})
 			.catch(err => {
 				res.status(400).json({
@@ -25,7 +25,7 @@ class TvController {
 		Tv.find({})
 			.populate("tag")
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "Tvs found successfully", data: data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -35,7 +35,7 @@ class TvController {
 	static getById(req, res) {
 		Tv.findById(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "Tv found successfully", data: data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -44,16 +44,18 @@ class TvController {
 
 	static update(req, res) {
 		Tv.findByIdAndUpdate(
-			ObjectIdHelper.convertStringIntoObjId(req.params.TvId),
+			req.params.TvId,
 			{
 				title: req.body.title,
 				overview: req.body.overview,
 				poster_path: req.body.poster_path,
 				popularity: req.body.popularity
+			},{
+				new: true
 			}
 		)
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "Tvs updated successfully", data: data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
@@ -63,7 +65,7 @@ class TvController {
 	static delete(req, res) {
 		Tv.findByIdAndRemove(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
 			.then(data => {
-				res.status(200).json(data);
+				res.status(200).json({ info: "Tvs deleted successfully", data: data });
 			})
 			.catch(err => {
 				res.status(500).json(err);
