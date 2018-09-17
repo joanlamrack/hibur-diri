@@ -2,15 +2,18 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
+const expressGQL = require("express-graphql");
 const logger = require("morgan");
-
 const indexroute = require("./routes/index");
+
+const schema = require("./schemas");
 
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/graphql", expressGQL({ schema, graphiql: true }));
 
 app.use("/", indexroute);
 

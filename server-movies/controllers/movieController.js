@@ -35,7 +35,7 @@ class MovieController {
 	}
 
 	static getById(req, res) {
-		Tv.findById(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
+		Tv.findById(req.params.TvId)
 			.then(data => {
 				res.status(200).json({ info: "movie found successfully", data });
 			})
@@ -46,7 +46,7 @@ class MovieController {
 
 	static update(req, res) {
 		Tv.findByIdAndUpdate(
-			ObjectIdHelper.convertStringIntoObjId(req.params.TvId),
+			req.params.TvId,
 			{
 				title: req.body.title,
 				overview: req.body.overview,
@@ -66,7 +66,7 @@ class MovieController {
 	}
 
 	static delete(req, res) {
-		Tv.findByIdAndRemove(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
+		Tv.findByIdAndRemove(req.params.TvId)
 			.then(data => {
 				res.status(200).json({ info: "movie delete successfully", data });
 			})

@@ -33,7 +33,7 @@ class TvController {
 	}
 
 	static getById(req, res) {
-		Tv.findById(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
+		Tv.findById(req.params.TvId)
 			.then(data => {
 				res.status(200).json({ info: "Tv found successfully", data: data });
 			})
@@ -63,7 +63,7 @@ class TvController {
 	}
 
 	static delete(req, res) {
-		Tv.findByIdAndRemove(ObjectIdHelper.convertObjectIdToStr(req.params.TvId))
+		Tv.findByIdAndRemove(req.params.TvId)
 			.then(data => {
 				res.status(200).json({ info: "Tvs deleted successfully", data: data });
 			})
