@@ -12,7 +12,7 @@ client.on("connected", function() {
 module.exports = {
 	setValue: function(key, value) {
 		return new Promise((resolve, reject) => {
-			client.set(key, JSON.stringify(value), "EX", 6000, res => {
+			client.set(key, JSON.stringify(value), "EX", 120, res => {
 				resolve(res);
 			});
 		});
